@@ -15,19 +15,18 @@ typedef long long ll;
 #endif
 
 string getNextArgName (string &names) {
-    stack< char > stk;
+    int cnt = 0;
     string name = "";
     for (int i = 0; i < names.length(); ++i) {
         char &c = names[i];
-        if (c == ',' && stk.empty()) {
+        if (c == ',' && cnt == 0) {
             names = names.substr(i + 1);
             break;
         } else {
             if (c == '(') {
-                stk.push(c);
+                ++cnt;
             } else if (c == ')') {
-                assert(!stk.empty());
-                stk.pop();
+                --cnt;
             }
             name += c;
         }
